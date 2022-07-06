@@ -31,7 +31,7 @@
 
         <div class="col-sm-2">
           <label class="font-weight-bold" for="Stock">Stock</label>
-          <input required type="number" min="1" max="1000" class="form-control" name="Stock" id="Stock" placeholder="ABC">
+          <input required type="number" min="1" max="1000" class="form-control" name="Stock" id="Stock" placeholder="1,2,3,...">
         </div>
         <div class="col-sm-2">
           <label class="font-weight-bold" for="Categoria">Categoría</label>

@@ -103,7 +103,7 @@ class Producto
 
       $query = $id;
 
-      $statement = $this->pdo->prepare("SELECT * FROM mgmzbx_Producto WHERE ProductoZb_id  LIKE :query");
+      $statement = $this->pdo->prepare("SELECT * FROM productos WHERE Id  LIKE :query");
       $statement->bindValue(':query', $query); //variable de sql
       $statement->execute();
 
@@ -149,9 +149,9 @@ class Producto
       $this->pdo = Database::iniciarConexion();
       $array = array();
 
-      $statement = $this->pdo->prepare("SELECT  c.Producto_id,c.Producto_name,c.Producto_sigla,c.Producto_pais
-            FROM mgmcu_Productos c
-            ORDER BY c.Producto_name asc  LIMIT 999 ");
+      $statement = $this->pdo->prepare("SELECT  Id,Producto, Categoria, Precio, Stock, Imagen
+            FROM productos
+            ORDER BY Producto asc  LIMIT 999 ");
 
       $statement->execute();
 

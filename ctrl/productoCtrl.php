@@ -96,20 +96,20 @@ class ProductoCtrl
   //   $Productos = $obj->allProducto();
   //   return $Productos;
   // }
-  // function ProductoxId($id)
-  // {
-  //   $obj = new Producto();
-  //   $Productos = $obj->ProductoxId($id);
-  //   return $Productos;
-  // }
+  function ProductoxId($id)
+  {
+    $obj = new Producto();
+    $Productos = $obj->ProductoxId($id);
+    return $Productos;
+  }
 
-  // function allProductoZabbix()
-  // {
+  function allProductos()
+  {
 
-  //   $obj = new Producto();
-  //   $Productos = $obj->allProductoZabbix();
-  //   return $Productos;
-  // }
+    $obj = new Producto();
+    $Productos = $obj->allProductos();
+    return $Productos;
+  }
 
 
   function mostrarProducto()
@@ -184,29 +184,29 @@ class ProductoCtrl
       $resul .= PHP_EOL;
       $ok = false;
     }
-    if (strlen($formStock) >= 1 and strlen($formStock) <= 4) {
-      $resul .= "La sigla debe ser mayor de 1 y menor que 1000";
-      $resul .= PHP_EOL;
-      $ok = false;
-    }
 
     if (empty($formCategoria)) {
-      $resul .= "Ingrese el país";
+      $resul .= "Ingrese la categoria";
       $resul .= PHP_EOL;
       $ok = false;
     }
     if (empty($formImagen)) {
-      $resul .= "Ingrese el país";
+      $resul .= "Ingrese la imagen";
       $resul .= PHP_EOL;
       $ok = false;
     }
+    if (!isset($_FILES["ajaxImagen"])) {
+      $resul .= "Ingrese la imagen";
+      $resul .= PHP_EOL;
+      $ok = false;
+    } else {
+      $arrayImagen = $_FILES["ajaxImagen"];
+
+      $nameImage = $arrayImagen["name"]; // [name] => MyFile.txt
+    }
+
     if (empty($formPrecio)) {
       $resul .= "Ingrese el precio";
-      $resul .= PHP_EOL;
-      $ok = false;
-    }
-    if (strlen($formPrecio) >= 1) {
-      $resul .= "La cifra debe ser mayor de 1";
       $resul .= PHP_EOL;
       $ok = false;
     }
@@ -217,6 +217,7 @@ class ProductoCtrl
       // $formDateUpdate = date("Y-m-d H:i:s");
       // $formUpdateBy = 477;
       //$resul="hola";
+      move_uploaded_file($_FILES['ajaxImagen']['tmp_name'], '../images/' . $nameImage);
 
       $Obj = new Producto();
       $Obj->setId($formID);

@@ -6,65 +6,69 @@ include_once("ProductoCtrl.php");
 //include_once("vacacionesControl.php");
 
 
-if (isset($_POST["ajaxBoton"])) {//si he echo chic en algunos d elos botones
- 
-    $accionBoton=trim(strip_tags($_POST["ajaxBoton"]));
- 
-    switch ($accionBoton) {
- 
+if (isset($_POST["ajaxBoton"])) { //si he echo chic en algunos d elos botones
+
+  $accionBoton = trim(strip_tags($_POST["ajaxBoton"]));
+
+  switch ($accionBoton) {
+
       // case "Guardar":   echo EnviarEquipoCtrl();    break;   
 
       // case "Buscar Producto":   echo EnviarEquipoBqdCtrl();    break;   
 
       //   case "Registrar":   echo EnviarPlantillaCtrl();    break;   
- 
+
       //   case "Buscar":      echo EnviarPlantillaBqdCtrl();    break; 
- 
+
       //   case "Actualizar":   echo EnviarPlantillaActCtrl();    break; 
 
       //   case "Actualizar Equipo":   echo EnviarActualizacionEquipoCtrl();    break; 
 
-         case "Guardar Producto":   echo guardarProducto();    break; 
-      //   case "Actualizar Producto":   echo updateProducto();    break; 
- 
-        default:
-            
-            break;
-    }
- 
- }
+    case "Guardar Producto":
+      echo guardarProducto();
+      break;
+    case "Actualizar Producto":
+      echo updateProducto();
+      break;
 
- else {
-   echo mostrarProductos();
- }
+    default:
 
- function updateProducto(){
+      break;
+  }
+} else {
+  echo mostrarProductos();
+}
 
-   $Obj=new ProductoCtrl(); 
-   $resultado= $Obj->updateProducto();
- 
-    return $resultado;//mensaje de actualizacion de model
- 
- }
+function updateProducto()
+{
+
+  $Obj = new ProductoCtrl();
+  $resultado = $Obj->updateProducto();
+
+  return $resultado; //mensaje de actualizacion de model
+
+}
 
 
- function guardarProducto(){
+function guardarProducto()
+{
 
-   $Obj=new ProductoCtrl(); 
-   $resultado= $Obj->guardarProductoCtrl();
- 
-    return $resultado;//mensaje de actualizacion de model
- 
- }
+  $Obj = new ProductoCtrl();
+  $resultado = $Obj->guardarProductoCtrl();
 
-  function mostrarProductos(){
+  return $resultado; //mensaje de actualizacion de model
 
-   $Obj=new ProductoCtrl(); 
-   $resul= $Obj->mostrarProducto();
- 
-    return $resul;//mensaje de actualizacion de model
- 
- }
+}
+
+function mostrarProductos()
+{
+
+  $Obj = new ProductoCtrl();
+  $resul = $Obj->mostrarProducto();
+
+  return $resul; //mensaje de actualizacion de model
+
+}
 
 //  function EnviarActualizacionEquipoCtrl(){
 

@@ -59,42 +59,38 @@ class Producto
   }
 
 
-  // function updateProducto($Producto)
-  // {
+  function updateProducto($Producto)
+  {
 
 
-  //   try {
-  //     $this->pdo = Database::iniciarConexion();
-  //     // $arrayPersonal=array();
-  //     $statement = $this->pdo->prepare("UPDATE mgmzbx_Producto SET 
+    try {
+      $this->pdo = Database::iniciarConexion();
+      // $arrayPersonal=array();
+      $statement = $this->pdo->prepare("UPDATE Producto SET 
 
-  //       ProductoZb_pais=:p1,
-  //       ProductoZb_sigla=:p2,
-  //       ProductoZb_nombre=:p3,
-  //       ProductoZb_ip=:p4,
-  //       ProductoZb_url=:p5,
-  //       ProductoZb_dateUpdate=:p6,
-  //       ProductoZb_UpdateBy=:p7
+        Producto=:p1,
+        Categoria=:p2,
+        Precio=:p3,
+        Stock=:p4,
+        Imagen=:p5
 
-  //       WHERE   ProductoZb_id=:id");
+        WHERE   Id=:id");
 
-  //     $statement->bindValue(":id", $Producto->getId());
-  //     $statement->bindValue(":p1", $Producto->getPais());
-  //     $statement->bindValue(":p2", $Producto->getSigla());
-  //     $statement->bindValue(":p3", $Producto->getNombre());
-  //     $statement->bindValue(":p4", $Producto->getIP());
-  //     $statement->bindValue(":p5", $Producto->getURL());
-  //     $statement->bindValue(":p6", $Producto->getDateUpdate());
-  //     $statement->bindValue(":p7", $Producto->getUpdateBy());
-  //     $resultset = $statement->execute();
-  //     //Ejecuta en la base de datos
-  //     $msje = "Datos actualizados correctamente";
-  //     // echo $msje,"estamos en el model";
-  //     return $msje;
-  //   } catch (Exception $e) {
-  //     die($e->getMessage());
-  //   }
-  // }
+      $statement->bindValue(":id", $Producto->getId());
+      $statement->bindValue(":p1", $Producto->getProducto());
+      $statement->bindValue(":p2", $Producto->getCategoria());
+      $statement->bindValue(":p3", $Producto->getPrecio());
+      $statement->bindValue(":p4", $Producto->getStock());
+      $statement->bindValue(":p5", $Producto->getImagen());
+      $resultset = $statement->execute();
+      //Ejecuta en la base de datos
+      $msje = "Datos actualizados correctamente";
+      // echo $msje,"estamos en el model";
+      return $msje;
+    } catch (Exception $e) {
+      die($e->getMessage());
+    }
+  }
 
 
   function ProductoxId($id)
@@ -125,16 +121,13 @@ class Producto
     try {
 
       $this->pdo = Database::iniciarConexion();
-      $statement = $this->pdo->prepare("INSERT INTO mgmzbx_Producto(ProductoZb_pais,ProductoZb_sigla,ProductoZb_nombre,ProductoZb_ip,ProductoZb_url,ProductoZb_dateCreacion,ProductoZb_dateUpdate,ProductoZb_creadoBy,ProductoZb_UpdateBy) VALUES (:p1,:p2,:p3,:p4,:p5,:p6,:p7,:p8,:p9)");
-      $statement->bindValue(":p1", $Producto->getPais());
-      $statement->bindValue(":p2", $Producto->getSigla());
-      $statement->bindValue(":p3", $Producto->getNombre());
-      $statement->bindValue(":p4", $Producto->getIP());
-      $statement->bindValue(":p5", $Producto->getURL());
-      $statement->bindValue(":p6", $Producto->getDateCreado());
-      $statement->bindValue(":p7", $Producto->getDateUpdate());
-      $statement->bindValue(":p8", $Producto->getCreadoBy());
-      $statement->bindValue(":p9", $Producto->getUpdateBy());
+      $statement = $this->pdo->prepare("INSERT INTO productos(Producto, Categoria, Precio, Stock, Imagen) VALUES (:p1,:p2,:p3,:p4,:p5)");
+      $statement->bindValue(":p1", $Producto->getProducto());
+      $statement->bindValue(":p2", $Producto->getCategoria());
+      $statement->bindValue(":p3", $Producto->getPrecio());
+      $statement->bindValue(":p4", $Producto->getStock());
+      $nameImg=$Producto->getImagen();
+      $statement->bindValue(":p5", $nameImg["name"]);
 
 
       $resultset = $statement->execute();

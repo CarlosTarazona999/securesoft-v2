@@ -7,7 +7,7 @@ class Database
 {
     public static function iniciarConexion()
     {
-        $servidor = "127.0.0.1:33065";
+        $servidor = "127.0.0.1:3306";
         $base_de_datos = "bdform";
         $usuario = "root";
         $clave = "";

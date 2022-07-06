@@ -1,1 +1,1 @@
-<?php header ('location: /cli.php'); ?>
+<?php header ('location: /securesoft-v2/view/cli.php'); ?>

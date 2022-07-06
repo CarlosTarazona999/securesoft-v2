@@ -406,4 +406,3 @@ class plantillaCtrl
 $reportCtrl=new plantillaCtrl;
 $frecu=$reportCtrl->traerBqdFrecuenciadeModel(102)[0]->reporte_sigla;
 echo $frecu;*/
-?>

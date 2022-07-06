@@ -38,17 +38,17 @@ if (isset($_POST["ajaxBoton"])) {//si he echo chic en algunos d elos botones
    echo mostrarProductos();
  }
 
-//  function updateProducto(){
+ function updateProducto(){
 
-//    $Obj=new ProductoCtrl(); 
-//    $resultado= $Obj->updateProducto();
+   $Obj=new ProductoCtrl(); 
+   $resultado= $Obj->updateProducto();
  
-//     return $resultado;//mensaje de actualizacion de model
+    return $resultado;//mensaje de actualizacion de model
  
-//  }
+ }
 
 
- function guardarProducto(){s
+ function guardarProducto(){
 
    $Obj=new ProductoCtrl(); 
    $resultado= $Obj->guardarProductoCtrl();

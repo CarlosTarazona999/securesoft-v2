@@ -11,11 +11,11 @@ class ProductoCtrl
   function guardarProductoCtrl()
   {
 
-    $formProducto = trim($_POST["ajaxProducto"]); //SIGLA DIA
-    $formStock = trim($_POST["ajaxStock"]); //SIGLA APP
-    $formCategoria = trim($_POST["ajaxCategoria"]); //SIGLA APP
-    $formImagen = trim($_POST["ajaxImagen"]); //SIGLA APP
-    $formPrecio = trim($_POST["ajaxPrecio"]); //SIGLA APP
+    $formProducto = trim($_POST["ajaxProducto"]);
+    $formStock = trim($_POST["ajaxStock"]);
+    $formCategoria = trim($_POST["ajaxCategoria"]);
+    $formImagen = ($_FILES["ajaxImagen"]);
+    $formPrecio = trim($_POST["ajaxPrecio"]);
 
     // $formURL="http:";
     $ok = true; //Si es true, debemos registrar, si es false, debe mostrar los errores
@@ -26,71 +26,61 @@ class ProductoCtrl
       $resul .= "Ingrese el nombre del producto";
       $resul .= PHP_EOL;
       $ok = false;
-  }
+    }
 
-  if (empty($formStock)) {
+    if (empty($formStock)) {
       $resul .= "Ingrese la stock";
       $resul .= PHP_EOL;
       $ok = false;
-  }
-
-    if (empty($formSigla)) {
-      $resul .= "Ingrese la sigla del Producto";
-      $resul .= PHP_EOL;
-      $ok = false;
-    } elseif (isset($formSigla)) {
-
-      $obj = new Producto();
-      $lista_Producto = $obj->allProductoZabbix();
-
-      for ($i = 0; $i < count($lista_Producto); $i++) {
-        $fila = $lista_Producto[$i];
-        foreach ($fila as $key => $value) {
-          if ($key == "ProductoZb_sigla") {
-            $siglas[] = $value;
-          }
-        }
-      }
-      //  $lista=[];//aca me quede{e}
-      if (in_array($formSigla, $siglas)) {
-        $resul .= "La sigla ya se encuentra registrada";
-        $resul .= PHP_EOL;
-        $ok = false;
-      }
-      if (strlen($formSigla) >= 3 and strlen($formSigla) <= 4) {
-        $resul .= "La sigla debe tener 3 caracteres";
-        $resul .= PHP_EOL;
-        $ok = false;
-      }
     }
 
-    if (empty($formPais)) {
-      $resul .= "Ingrese el país";
+    if (empty($formCategoria)) {
+      $resul .= "Ingrese la categoria";
       $resul .= PHP_EOL;
       $ok = false;
     }
+    if (empty($formImagen)) {
+      $resul .= "Ingrese la imagen";
+      $resul .= PHP_EOL;
+      $ok = false;
+    }
+    if (!isset($_FILES["ajaxImagen"])) {
+      $resul .= "Ingrese la imagen";
+      $resul .= PHP_EOL;
+      $ok = false;
+    } else {
+      $arrayImagen = $_FILES["ajaxImagen"];
 
+      $nameImage = $arrayImagen["name"]; // [name] => MyFile.txt
+    }
+
+    if (empty($formPrecio)) {
+      $resul .= "Ingrese el precio";
+      $resul .= PHP_EOL;
+      $ok = false;
+    }
 
 
     if ($ok == true) {
 
-      $formCreadoBy = 477;
-      $formDateCreado = date("Y-m-d H:i:s");
-      $formDateUpdate = null;
-      $formUpdateBy = null;
+      // $formCreadoBy = 477;
+      // $formDateCreado = date("Y-m-d H:i:s");
+      // $formDateUpdate = null;
+      // $formUpdateBy = null;
       //$resul="hola";
+      move_uploaded_file($_FILES['ajaxImagen']['tmp_name'], '../images/' . $nameImage);
 
       $Obj = new Producto();
 
-      $Obj->setPais($formPais);
-      $Obj->setSigla($formSigla);
-      $Obj->setNombre($formProducto);
-      $Obj->setIP($formIP);
-      $Obj->setURL($formURL);
-      $Obj->setDateCreado($formDateCreado);
-      $Obj->setDateUpdate($formDateUpdate);
-      $Obj->setCreadoBy($formCreadoBy);
-      $Obj->setUpdateBy($formUpdateBy);
+      $Obj->setProducto($formProducto);
+      $Obj->setStock($formStock);
+      $Obj->setCategoria($formCategoria);
+      $Obj->setImagen($formImagen);
+      $Obj->setPrecio($formPrecio);
+      // $Obj->setDateCreado($formDateCreado);
+      // $Obj->setDateUpdate($formDateUpdate);
+      // $Obj->setCreadoBy($formCreadoBy);
+      // $Obj->setUpdateBy($formUpdateBy);
       //$resul="holaAAA";
       $resul = $Obj->guardarProducto($Obj);
     }
@@ -151,11 +141,9 @@ class ProductoCtrl
         if ($key == 'Id') {
 
           $resultado .= "";
-        }
-        elseif ($key=='Imagen') {
+        } elseif ($key == 'Imagen') {
           $resultado .= "<td><img width='50' height='50'  src='../images/$Producto->Imagen'></td>";
-        }
-        else {
+        } else {
 
           $resultado .= '<td>' . $atributo . '</td>';
         }
@@ -174,66 +162,69 @@ class ProductoCtrl
 
     $formID = trim($_POST["ajaxId"]); //SIGLA DIA
     $formProducto = trim($_POST["ajaxProducto"]); //SIGLA DIA
-    $formIP = trim($_POST["ajaxIP"]); //SIGLA APP
-    $formSigla = trim($_POST["ajaxSigla"]); //SIGLA APP
-    $formPais = trim($_POST["ajaxPais"]); //SIGLA APP
+    $formStock = trim($_POST["ajaxStock"]); //SIGLA APP
+    $formCategoria = trim($_POST["ajaxCategoria"]); //SIGLA APP
+    $formImagen = trim($_POST["ajaxImagen"]); //SIGLA APP
+    $formPrecio = trim($_POST["ajaxPrecio"]);
     //  $obj=new Producto();
     //$Productos=$obj->allProducto();
-
-    $formURL = "http://" . $formIP . "/zabbix/";
 
     $ok = true; //Si es true, debemos registrar, si es false, debe mostrar los errores
 
     $resul = "";
 
     if (empty($formProducto)) {
-      $resul .= "Ingrese el nombre del Producto";
+      $resul .= "Ingrese el nombre del producto";
       $resul .= PHP_EOL;
       $ok = false;
     }
 
-    if (empty($formIP)) {
-      $resul .= "Ingrese la IP";
+    if (empty($formStock)) {
+      $resul .= "Ingrese la stock";
+      $resul .= PHP_EOL;
+      $ok = false;
+    }
+    if (strlen($formStock) >= 1 and strlen($formStock) <= 4) {
+      $resul .= "La sigla debe ser mayor de 1 y menor que 1000";
       $resul .= PHP_EOL;
       $ok = false;
     }
 
-    if (empty($formSigla)) {
-      $resul .= "Ingrese la sigla del Producto";
-      $resul .= PHP_EOL;
-      $ok = false;
-    } elseif (isset($formSigla)) {
-
-      if (strlen($formSigla) != 3) {
-        $resul .= "La sigla debe tener 3 caracteres";
-        $resul .= PHP_EOL;
-        $ok = false;
-      }
-    }
-
-    if (empty($formPais)) {
+    if (empty($formCategoria)) {
       $resul .= "Ingrese el país";
       $resul .= PHP_EOL;
       $ok = false;
     }
-
+    if (empty($formImagen)) {
+      $resul .= "Ingrese el país";
+      $resul .= PHP_EOL;
+      $ok = false;
+    }
+    if (empty($formPrecio)) {
+      $resul .= "Ingrese el precio";
+      $resul .= PHP_EOL;
+      $ok = false;
+    }
+    if (strlen($formPrecio) >= 1) {
+      $resul .= "La cifra debe ser mayor de 1";
+      $resul .= PHP_EOL;
+      $ok = false;
+    }
 
 
     if ($ok == true) {
 
-      $formDateUpdate = date("Y-m-d H:i:s");
-      $formUpdateBy = 477;
+      // $formDateUpdate = date("Y-m-d H:i:s");
+      // $formUpdateBy = 477;
       //$resul="hola";
 
       $Obj = new Producto();
       $Obj->setId($formID);
-      $Obj->setPais($formPais);
-      $Obj->setSigla($formSigla);
-      $Obj->setNombre($formProducto);
-      $Obj->setIP($formIP);
-      $Obj->setURL($formURL);
-      $Obj->setDateUpdate($formDateUpdate);
-      $Obj->setUpdateBy($formUpdateBy);
+      $Obj->setProducto($formProducto);
+      $Obj->setStock($formStock);
+      $Obj->setCategoria($formCategoria);
+      $Obj->setImagen($formImagen);
+      $Obj->setPrecio($formPrecio);
       $resul = $Obj->updateProducto($Obj);
     }
 

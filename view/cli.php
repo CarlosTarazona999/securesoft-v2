@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Reportes de Zabbix</title>
+  <title>Reportes de Productos</title>
   <?php require_once 'Extras/head.php'; ?>
 
   <?php
@@ -35,7 +35,7 @@
         </div>
         <div class="col-sm-2">
           <label class="font-weight-bold" for="Categoria">Categoría</label>
-          <input required min="1" max="1000" class="form-control" name="Categoria" id="Categoria" placeholder="Lacteos">
+          <input required class="form-control" name="Categoria" id="Categoria" placeholder="Lacteos">
         </div>
         <div class="col-sm-2">
           <label class="font-weight-bold" for="Precio">Precio</label>

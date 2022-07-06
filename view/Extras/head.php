@@ -1,5 +1,5 @@
 <?php 
-$real_path = '/zabbiX';
+$real_path = '/securesoft-v2';
 ?>
 <script type="text/javascript" src="<?php echo $real_path.'/view/Extras/jquery/jquery-3.3.1.js';?>"></script> 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />

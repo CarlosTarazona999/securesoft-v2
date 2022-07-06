@@ -134,7 +134,7 @@ class ProductoCtrl
     for ($fila = 0; $fila < count($array_Productos); $fila++) {
       $resultado .= '<tr> ';
       $Producto = $array_Productos[$fila];
-      $resultado .= '<td><a style="width: 45px;" class="btn btn-danger"  href="#">' . $ix++ . '</a><a class="btn btn-info" style="margin: 1px"  href="upCli.php?id=' . $Producto->Id . '">Editar</a></td>';
+      $resultado .= '<td><a style="width: 45px;" class="btn btn-danger"  href="#">' . $ix++ . '</a><a class="btn btn-info" style="margin: 1px"  href="upCli.php?Id=' . $Producto->Id . '">Editar</a></td>';
 
       foreach ($Producto as $key => $atributo) {
 
@@ -164,7 +164,7 @@ class ProductoCtrl
     $formProducto = trim($_POST["ajaxProducto"]); //SIGLA DIA
     $formStock = trim($_POST["ajaxStock"]); //SIGLA APP
     $formCategoria = trim($_POST["ajaxCategoria"]); //SIGLA APP
-    $formImagen = trim($_POST["ajaxImagen"]); //SIGLA APP
+    $formImagen = ($_FILES["ajaxImagen"]); //SIGLA APP
     $formPrecio = trim($_POST["ajaxPrecio"]);
     //  $obj=new Producto();
     //$Productos=$obj->allProducto();

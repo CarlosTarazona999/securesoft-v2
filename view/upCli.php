@@ -12,7 +12,6 @@ if (isset($_GET["Id"])) {
   $id_Producto = $_GET["Id"];
   $obj = new ProductoCtrl;
   $Productos = $obj->ProductoxId($id_Producto);
-  var_dump($Productos);
   //$lista_categorias = $imgCtrlObj->traerCategoriasdesdeModel();
 }
 
@@ -65,6 +64,7 @@ if (isset($_GET["Id"])) {
       </div>
       <div class="col-sm-2">
         <label class="form-label font-weight-bold">Imagen</label>
+        <img width="50" heigth="50" src="../images/<?php echo $Productos[0]->Imagen; ?>">
         <input class="form-control" type="file" id="Imagen" name="Imagen" accept="image/jpg, image/png" />
       </div>
 
@@ -116,7 +116,7 @@ if (isset($_GET["Id"])) {
         var x = r.length;
         // alert (x);
 
-        if (x === 35) {
+        if (x === 36) {
           swal({
             title: "Mensaje de sistema",
             html: r,

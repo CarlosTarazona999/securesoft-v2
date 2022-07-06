@@ -66,7 +66,7 @@ class Producto
     try {
       $this->pdo = Database::iniciarConexion();
       // $arrayPersonal=array();
-      $statement = $this->pdo->prepare("UPDATE Producto SET 
+      $statement = $this->pdo->prepare("UPDATE productos SET 
 
         Producto=:p1,
         Categoria=:p2,
@@ -81,7 +81,7 @@ class Producto
       $statement->bindValue(":p2", $Producto->getCategoria());
       $statement->bindValue(":p3", $Producto->getPrecio());
       $statement->bindValue(":p4", $Producto->getStock());
-      $statement->bindValue(":p5", $Producto->getImagen());
+      $statement->bindValue(":p5", $Producto->getImagen()["name"]);
       $resultset = $statement->execute();
       //Ejecuta en la base de datos
       $msje = "Datos actualizados correctamente";

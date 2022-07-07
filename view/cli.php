@@ -1,3 +1,13 @@
+<?php
+
+include_once("../ctrl/productoCtrl.php");
+
+$reportCtrl = new ProductoCtrl;
+
+$listacategoria = $reportCtrl->traerCategoriadeBD();
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -35,7 +45,14 @@
         </div>
         <div class="col-sm-2">
           <label class="font-weight-bold" for="Categoria">Categoría</label>
-          <input required class="form-control" name="Categoria" id="Categoria" placeholder="Lacteos">
+          <select class="form-control" name="Categoria" id="Categoria">
+            <?php
+            for ($i = 0; $i < count($listacategoria); $i++) {
+              echo '<option value="' . $listacategoria[$i]->IdCategoria . '">' . $listacategoria[$i]->NombreCategoria . '</option>';
+            }
+            ?>
+          </select>
+
         </div>
         <div class="col-sm-2">
           <label class="font-weight-bold" for="Precio">Precio</label>

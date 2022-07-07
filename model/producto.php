@@ -126,7 +126,7 @@ class Producto
       $statement->bindValue(":p2", $Producto->getCategoria());
       $statement->bindValue(":p3", $Producto->getPrecio());
       $statement->bindValue(":p4", $Producto->getStock());
-      $nameImg=$Producto->getImagen();
+      $nameImg = $Producto->getImagen();
       $statement->bindValue(":p5", $nameImg["name"]);
 
 
@@ -171,8 +171,10 @@ class Producto
       $this->pdo = Database::iniciarConexion();
       $array = array();
 
-      $statement = $this->pdo->prepare("SELECT  Id,Producto, Categoria, Precio, Stock, Imagen
-            FROM productos
+      $statement = $this->pdo->prepare("SELECT  p.Id,p.Producto, c.NombreCategoria, p.Precio, p.Stock, p.Imagen
+            FROM productos p 
+            INNER JOIN categorias c
+            WHERE p.Categoria = c.IdCategoria
             ORDER BY Producto  LIMIT 999 ");
 
       $statement->execute();
@@ -180,6 +182,21 @@ class Producto
       $array = $statement->fetchAll(PDO::FETCH_OBJ);
 
       return $array;
+    } catch (Exception $e) {
+      die($e->getMessage());
+    }
+  }
+  function mostrarCategoriadeBD()
+  {
+
+    try {
+      $this->pdo = Database::iniciarConexion();
+      $arrayData = array();
+      $statement = $this->pdo->prepare("SELECT * FROM categorias");
+      $statement->execute();
+      $arrayData = $statement->fetchAll(PDO::FETCH_OBJ);
+
+      return  $arrayData;
     } catch (Exception $e) {
       die($e->getMessage());
     }

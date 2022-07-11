@@ -24,7 +24,7 @@ $listacategoria = $reportCtrl->traerCategoriadeBD();
   //  $listaProducto=$obj->allProducto();
   ?>
 </head>
-
+//body prueba comentario
 <body>
   <?php //require_once 'Extras/menu.php'; 
   ?>
